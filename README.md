@@ -1,40 +1,34 @@
-# 나만의 HQ
+# 나만의 HQ v6 - 드라이브 자동저장 + 엑셀 버전
 
-> 오늘의 일과 / 업무계획(날짜범위) / 했던 일 대시보드 - 나만 쓰는 Private 앱
+## ✨ 최종 기능
+- 오늘의 일과: 날짜/시간 지정, 추가/수정/삭제/저장 버튼 (명확히 표시)
+- 업무계획: 시작일~마감일 범위 지정, D-day, 수정/삭제 버튼
+- 했던 일: 아카이브, 삭제
+- ☁️ 구글 드라이브 자동 저장: ON/OFF 토글, 2초 디바운스 자동 저장, 마지막 저장 시간 표시
+- 📊 엑셀 내보내기: 3개 시트 (일과/업무계획/했던일) - SheetJS 사용
+- 📥 엑셀 불러오기: 엑셀 파일로 데이터 복원
+- 밝은 비비드 UI, PWA 설치 지원
 
-## 📂 파일
-- `index.html` : 앱 전체 (단일 파일, 그대로 배포)
-- `manifest.json` : PWA 앱 정보 (홈화면 설치용)
-- `sw.js` : 오프라인 캐시용 서비스워커
+## 📦 배포 방법 (GitHub Pages)
 
-## 🚀 GitHub Pages 배포 (가장 쉬운 방법)
+1. GitHub에서 새 리포 `my-hq` 생성 (Public)
+2. 아래 4개 파일 업로드:
+   - index.html
+   - manifest.json
+   - sw.js
+   - .nojekyll
+3. Settings > Pages > Deploy from a branch > main / root > Save
+4. 1~2분 후 https://USERNAME.github.io/my-hq/ 주소 생성
+5. 폰에서 Safari/Chrome으로 접속 > 공유 > 홈 화면에 추가
 
-1. **리포 생성**
-   - github.com → New repository → 이름 `my-hq` → Public → Create
+## 💾 드라이브 연동
+- 앱 상단 "드라이브 자동 저장 ON" 켜면 수정할 때마다 자동 백업
+- "드라이브에 지금 저장" 버튼으로 수동 저장 (JSON)
+- "엑셀로 내보내기" 하면 .xlsx 파일 다운로드 + 드라이브에도 저장 시뮬레이션
 
-2. **파일 업로드**
-   - `Add file > Upload files` → `index.html`, `manifest.json`, `sw.js` 3개 업로드 → Commit
+## 📊 엑셀 구조
+- 시트1 오늘의 일과: 날짜, 시간, 할 일, 상태, 완료일
+- 시트2 업무계획: 제목, 시작일, 마감일, 기간, D-day, 우선순위, 상태
+- 시트3 했던 일: 완료일, 원래 날짜, 제목, 구분
 
-3. **Pages 켜기**
-   - Settings → Pages → 
-   - Source: `Deploy from a branch`
-   - Branch: `main` / `/(root)` → Save
-   - 1~2분 뒤 상단에 `https://USERNAME.github.io/my-hq/` 주소 생김
-
-4. **휴대폰에 앱처럼 설치**
-   - iPhone: Safari로 접속 → 공유 → 홈 화면에 추가
-   - Android: Chrome으로 접속 → ⋮ → 홈 화면에 추가 / 앱 설치
-
-데이터는 폰 브라우저의 localStorage에 저장됩니다. 다른 사람이 접속해도 각자 폰에만 저장되어 완전히 분리됩니다.
-
-## 💾 Google Drive 백업
-앱 상단의 `드라이브에 저장` / `드라이브에서 불러오기` 버튼으로 JSON 백업/복원 가능.
-Google Drive API 연동 원하면 `gdrive.js` 추가 예정.
-
-## 🛠 수정 방법
-`index.html` 하나만 수정하면 됩니다. React 빌드 필요 없이 바로 반영됩니다.
-
-## 📱 PWA 기능
-- 홈 화면 아이콘
-- 전체화면 standalone 실행
-- 오프라인에서도 열림
+필요한 라이브러리: SheetJS (CDN으로 index.html에 이미 포함)
